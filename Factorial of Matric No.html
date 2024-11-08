@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Factorial of Last Two Digits</title>
+</head>
+<body>
+    <h1>Factorial Calculator</h1>
+    <p>Enter your Matric No.:</p>
+
+    <input type="text" id="inputText" placeholder="Enter your matriculation number">
+    <button onclick="calculateFactorial()">Calculate</button>
+
+    <p id="result"></p>
+
+    <script>
+        function factorial(n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        }
+
+        function extractLastTwoDigits(input) {
+            const digits = input.match(/\d/g);
+
+            if (!digits) return null;
+
+            const lastTwoDigits = parseInt(digits.slice(-2).join(''));
+            return lastTwoDigits;
+        }
+
+        function calculateFactorial() {
+            const inputText = document.getElementById("inputText").value;
+            const lastTwoDigits = extractLastTwoDigits(inputText);
+
+            if (lastTwoDigits === null) {
+                document.getElementById("result").textContent = "Please enter a correct Matric Number.";
+                return;
+            }
+
+            const result = factorial(lastTwoDigits);
+            document.getElementById("result").textContent = `The factorial of the last two digits (${lastTwoDigits}) is: ${result}`;
+        }
+    </script>
+</body>
+</html>
